@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informazione sulla qualità dell’acqua – LEA (modello stampabile)</title>
+  <style>
+    :root{
+      --lea-blue:#1089a7; /* accent */
+      --lea-dark:#0b2530; /* headings */
+      --ink:#1f2937;
+      --muted:#5b6b74;
+      --line:#e5e7eb;
+      --soft:#eef6f8; /* pale cyan */
+      --tag:#cfe9ef; /* row background */
+    }
+
+    html,body{height:100%}
+    body{margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial; color:var(--ink); background:#f6f7f8}
+
+    .sheet{max-width: 930px; margin: 24px auto; background:#fff; box-shadow:0 10px 30px rgba(0,0,0,.08)}
+
+    /* HEADER */
+    .header{display:grid; grid-template-columns: 1fr auto; align-items:start; gap:24px; padding:28px 32px 8px}
+    .brand{display:flex; align-items:center; gap:16px}
+    .brand .logo{width:84px; height:40px; background:linear-gradient(90deg, #1089a7 0%, #9ad4df 100%); -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="96" viewBox="0 0 200 96"><text x="0" y="72" font-family="Arial" font-size="80" font-weight="700">LEA</text></svg>') no-repeat 0 50%; mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="96" viewBox="0 0 200 96"><text x="0" y="72" font-family="Arial" font-size="80" font-weight="700">LEA</text></svg>') no-repeat 0 50%;}
+    .title{color:var(--lea-dark); font-weight:800; font-size:26px; line-height:1.15}
+
+    /* LEFT SIDEBAR LABEL */
+    .ribbon{display:grid; grid-template-columns: 280px 1fr; gap:24px; padding:0 32px 8px}
+    .ribbon .left .label{color:#167aa2; font-weight:700}
+    .ribbon .left .zone{font-size:22px; color:#167aa2; font-weight:800; line-height:1.1}
+
+    /* BODY TEXT */
+    .content{padding:0 32px 24px;}
+    p{line-height:1.55; margin: 0 0 12px}
+
+    /* FACT TABLES */
+    .facts{margin-top:12px; border-top:1px solid var(--line)}
+    .fact{display:grid; grid-template-columns: 280px 1fr 1fr; gap:24px; padding:14px 0; border-bottom:1px solid var(--line)}
+    .fact h3{grid-column:1 / -1; margin:0 0 6px; font-size:14px; color:var(--muted)}
+    .fact .key{font-weight:700}
+    .pill{background:var(--tag); padding:8px 10px; border-radius:6px; display:inline-block}
+
+    .params{margin-top:10px; border:1px solid var(--line); border-radius:12px; overflow:hidden}
+    .params .row{display:grid; grid-template-columns: 1fr 1fr 1fr;}
+    .params .row > div{padding:10px 12px; border-bottom:1px solid var(--line)}
+    .params .row:nth-child(odd) > div{background:#f0f2f3}
+    .params .head{font-size:14px; color:var(--muted); font-weight:700; background:var(--soft)}
+
+    /* MAP */
+    .map{height:200px; background:linear-gradient(180deg,#eaf3f6, #f7fbfc); display:grid; place-items:center; color:#94a3ad; border-radius:12px; border:1px solid var(--line); margin-top:14px}
+
+    /* FOOTER */
+    .footer{display:grid; grid-template-columns: 1fr auto auto auto; gap:16px; align-items:center; padding:18px 32px; color:#167aa2; border-top:1px solid var(--line); font-weight:700}
+    .footnote{color:#99a9b2; font-size:11px; margin-top:6px}
+
+    /* PAGE 2 */
+    .page-break{ page-break-before: always; }
+    .grid2{display:grid; grid-template-columns: 280px 1fr; gap:24px; padding:24px 32px}
+    .section-title{color:#167aa2; font-weight:800}
+
+    table.tbl{width:100%; border-collapse:collapse; margin-top:8px}
+    .tbl th, .tbl td{border:1px solid var(--line); padding:8px 10px; text-align:left}
+    .tbl thead th{background:var(--soft); font-size:14px; color:var(--muted)}
+    .tbl tbody td:nth-child(1){font-weight:700}
+    .tagcell{background:var(--tag)}
+
+    /* PRINT */
+    @media print{
+      @page{ size: A4 portrait; margin: 14mm; }
+      body{background:white}
+      .sheet{box-shadow:none; margin:0}
+      .footer .sep{display:none}
+      .printbar{display:none}
+      a[href]::after{ content:" (" attr(href) ")"; font-size:10px; color:#7b8b95 }
+    }
+
+    .printbar{display:flex; gap:8px; justify-content:flex-end; padding:10px 12px}
+    .btn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:8px 12px; cursor:pointer}
+  </style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="header">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+    </div>
+    <div class="title">Informazione sulla qualità<br/>dell’acqua</div>
+  </div>
+  <div class="printbar" aria-hidden="true">
+    <button class="btn" onclick="window.print()">Stampa</button>
+  </div>
+
+  <div class="ribbon">
+    <div class="left">
+      <div class="label">Zona distribuzione</div>
+      <div class="zone" id="zona">Locarno Piano di Magadino</div>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="content">
+    <p>L’acqua potabile in Svizzera viene intensamente sorvegliata e analizzata. Le aziende dell’acqua potabile, limitatamente alle possibilità tecniche e regolamentari, hanno l’obbligo di fornire alla popolazione acqua potabile di qualità eccellente, in quantità sufficiente. Quest’ambizioso obiettivo viene raggiunto grazie a molteplici fattori, primo fra tutti il lavoro del personale impiegato e la serietà del settore.</p>
+    <p>La qualità del prodotto fornito viene regolarmente certificata, in regime di controllo autonomo, e in seguito a verifiche indipendenti del Laboratorio Cantonale.</p>
+    <p>L’acqua potabile distribuita sul piano di Magadino nella zona di Locarno proviene integralmente dalle sorgenti Valpesta collocate nell’omonima valle. Grazie ai diversi strati di materiale che attraversa prima della captazione, essa si presenta al rubinetto equilibrata dal profilo chimico, limpida, fresca.</p>
+
+    <div class="facts">
+      <div class="fact">
+        <div class="key">Periodo</div>
+        <div class="pill" id="periodo">giugno 2025</div>
+        <div class="pill" id="mineralizzazione">Debolmente mineralizzata</div>
+      </div>
+      <div class="fact">
+        <div class="key">Provenienza</div>
+        <div class="pill">Acqua sorgiva</div>
+      </div>
+      <div class="fact">
+        <div class="key">Trattamento</div>
+        <div class="pill">Disinfezione con ultravioletti</div>
+      </div>
+      <div class="fact">
+        <div class="key">Durezza</div>
+        <div class="pill">Molto dolce</div>
+      </div>
+      <div class="fact">
+        <div class="key">Qualità classe OMS</div>
+        <div class="pill">Eccellente</div>
+      </div>
+    </div>
+
+    <div class="params" role="table" aria-label="Parametri">
+      <div class="row head"><div>Parametri</div><div></div><div></div></div>
+      <div class="row"><div>Bicarbonati</div><div class="tagcell">0.00 mg/L</div><div></div></div>
+      <div class="row"><div>Calcio</div><div class="tagcell">4.14 mg/L</div><div></div></div>
+      <div class="row"><div>Magnesio</div><div class="tagcell">1.09 mg/L</div><div></div></div>
+      <div class="row"><div>Sodio</div><div class="tagcell">2.50 mg/L</div><div></div></div>
+      <div class="row"><div>Potassio</div><div class="tagcell">1.68 mg/L</div><div></div></div>
+      <div class="row"><div>Cloruro</div><div class="tagcell">0.80 mg/L</div><div></div></div>
+      <div class="row"><div>Solfato</div><div class="tagcell">5.80 mg/L</div><div></div></div>
+      <div class="row"><div>Arsenico</div><div class="tagcell">0.00 µg/L</div><div></div></div>
+    </div>
+
+    <div class="map">Mappa zona di distribuzione (segnaposto)</div>
+
+    <div class="footer">
+      <div>Locarnese Ente Acqua<br/><span class="footnote">Piazza Grande 3, Casella postale, 6601 Locarno</span></div>
+      <div class="sep">·</div>
+      <div>T +41 91 601 83 00</div>
+      <div><a href="mailto:info@lea-ti.ch">info@lea-ti.ch</a> · <a href="https://lea-ti.ch">lea-ti.ch</a></div>
+    </div>
+    <div class="footnote">11001.002 1/2</div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="sheet page-break">
+  <div class="header">
+    <div class="brand"><div class="logo" aria-hidden="true"></div></div>
+    <div class="title">Informazione sulla qualità<br/>dell’acqua</div>
+  </div>
+
+  <div class="grid2">
+    <div class="section-title">Qualità “Classe OMS”</div>
+    <div>
+      <p>La classificazione della qualità dell’acqua potabile distribuita viene effettuata secondo le Linee guida concernenti la qualità dell’acqua potabile, pubblicate dall’Organizzazione Mondiale della Sanità.</p>
+      <table class="tbl" aria-label="Classi OMS">
+        <thead>
+          <tr><th>Popolazione</th><th>&lt; 5’000</th><th>5’000, 100’000</th><th>&gt; 100’000</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Eccellente</td><td>90%</td><td>95%</td><td>99%</td></tr>
+          <tr><td>Buona</td><td>80%</td><td>90%</td><td>95%</td></tr>
+          <tr><td>Sufficiente</td><td>70%</td><td>85%</td><td>90%</td></tr>
+          <tr><td>Scarsa</td><td>60%</td><td>80%</td><td>85%</td></tr>
+        </tbody>
+      </table>
+      <div class="footnote">% dei campioni negativi per E Coli e Enterococchi</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="section-title">Durezza</div>
+    <div>
+      <p>La durezza totale dell’acqua rappresenta il suo contenuto in sali, di calcio e magnesio, espresso in gradi francesi (1°fH = 0,1 millimoli di ioni Ca e Mg per litro d’acqua). La durezza dell’acqua dipende dall’ambiente di provenienza e non ha implicazioni sanitarie dirette, ma può causare incrostazioni per acque dure e corrosione per acque molto dolci.</p>
+      <table class="tbl" aria-label="Classi durezza">
+        <thead>
+          <tr><th>Durezza °fH</th><th>Indicazione</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1, 7</td><td>molto dolce</td></tr>
+          <tr><td>8, 15</td><td>dolce</td></tr>
+          <tr><td>16, 25</td><td>mediamente dura</td></tr>
+          <tr><td>26, 32</td><td>abbastanza dura</td></tr>
+          <tr><td>33, 42</td><td>dura</td></tr>
+          <tr><td>&gt; 42</td><td>molto dura</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="section-title">Mineralizzazione</div>
+    <div>
+      <p>Il grado di mineralizzazione indica il contenuto in sali minerali disciolti in un litro d’acqua. Può essere determinato con la misura del residuo secco oppure calcolato a partire dalla conduttività elettrica: mineralizzazione (mg/L) = 0.75 × conduttività (µS/cm).</p>
+      <table class="tbl" aria-label="Classi mineralizzazione">
+        <thead>
+          <tr><th>mg/L</th><th>Indicazione</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>&lt; 50</td><td>molto debolmente mineralizzata</td></tr>
+          <tr><td>50, 500</td><td>debolmente mineralizzata</td></tr>
+          <tr><td>501, 1500</td><td>mineralizzata</td></tr>
+          <tr><td>&gt; 1500</td><td>fortemente mineralizzata</td></tr>
+        </tbody>
+      </table>
+      <p>Prima di installare qualsiasi impianto di trattamento, vi preghiamo di contattare la nostra Azienda.</p>
+      <p>Per maggiori informazioni inerenti i criteri e i parametri di valutazione, vi invitiamo a contattarci tramite posta elettronica o telefonicamente.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="footer">
+      <div>Locarnese Ente Acqua<br/><span class="footnote">Piazza Grande 3, Casella postale, 6601 Locarno</span></div>
+      <div class="sep">·</div>
+      <div>T +41 91 601 83 00</div>
+      <div><a href="mailto:info@lea-ti.ch">info@lea-ti.ch</a> · <a href="https://lea-ti.ch">lea-ti.ch</a></div>
+    </div>
+    <div class="footnote">11001.002 2/2</div>
+  </div>
+</div>
+
+<script>
+// Piccole utilità per aggiornare i dati dal tuo sistema
+function setZona(z){ document.getElementById('zona').textContent = z }
+function setPeriodo(p){ document.getElementById('periodo').textContent = p }
+function setMineralizzazione(m){ document.getElementById('mineralizzazione').textContent = m }
+</script>
+
+</body>
+</html>
